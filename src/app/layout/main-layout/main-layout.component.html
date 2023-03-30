@@ -1,0 +1,25 @@
+<div class="main-layout container-fluid">
+    <div class="main-layout__navbar" [toggleNav]="toggleNav">
+        <app-nav-bar (close)="toggleNav = false"></app-nav-bar>
+    </div>
+    
+    <div class="main-layout__container" >
+        <div class="main-layout__container__header">
+            <div class="main-layout__container__header__toggle-navbar d-block d-sm-none">
+                <button (click)="onToggleNav()" type="button" class="btn btn-primary">
+                    <fa-icon [icon]="faBars"></fa-icon>
+                </button>
+            </div>
+
+            <div class="main-layout__container__header__logo text-center d-flex justify-content-center align-items-center flex-wrap gap-2 position-relative">
+                <img class="d-sm-none" src="assets/images/logo.png" alt="" srcset="" />
+                <span class=" fs-4 py-2">Equipment Management</span>
+                <div class="d-none d-md-flex fs-5  position-absolute top-0 end-0  d-flex justify-content-center align-items-center h-100">
+                    <span *ngIf="name">Hi, {{name}}</span>
+                </div>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+    <div class="overplay" toggleOverplay  (click)="toggleNav = false"></div>
+</div>

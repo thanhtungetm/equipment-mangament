@@ -1,0 +1,51 @@
+<app-modal [status]="status">
+    <div class="modal-header justify-content-center">
+        <h5 class="modal-title text-success text-center">Asignment</h5>
+    </div>
+    <div *ngIf="employee" class="modal-body text-center">
+        <div class="text-start">
+            <h5 class="text-primary">Employee:</h5>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="text-center bg-secondary text-white">
+                        <th colspan="2" class="fw-normal text-center"><span>Name</span></th>
+                        <th class="fw-normal text-center"><span>Phone</span></th>
+                    </tr>
+                    <tr class="text-center">
+                        <th colspan="2" scope="row">
+                            <span>{{ employee.fullName }}</span>
+                        </th>
+                        <th scope="row">
+                            <span>{{ employee.phoneNumber }}</span>
+                        </th>
+                    </tr>
+                    <tr class="text-center bg-secondary text-white">
+                        <th scope="row" class="fw-normal" colspan="2">Email</th>
+                        <td>Department</td>
+                    </tr>
+                    <tr class="text-center">
+                        <th class="fw-normal" colspan="2">
+                            <span>{{ employee.email }}</span>
+                        </th>
+                        <td>
+                            <span>{{ employee.departmentName }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <app-concrete-equipment-info [equipment]="equipment" [concrete]="concrete"></app-concrete-equipment-info>
+
+        <div class="text-start">
+            <label for="expiredDate">Expired Date</label>
+            <input [(ngModel)]="expiredDate" id="expiredDate" type="date" class="form-control" />
+            <div *ngIf="showError" class="text-danger">The date must be greater than current date!</div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="asign()">Asign Equipment</button>
+    </div>
+</app-modal>

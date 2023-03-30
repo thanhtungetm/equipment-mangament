@@ -1,0 +1,89 @@
+<div>
+    <div *ngIf="equipment; else showNotFound">
+        <div>Equipment Infomation:</div>
+        <table class="table table-bordered">
+            <tbody>
+                <tr class="text-center bg-secondary text-white">
+                    <th scope="row">Id</th>
+                    <td>Type</td>
+                    <td>Brand</td>
+                </tr>
+                <tr class="text-center">
+                    <th>
+                        <span>{{ equipment.id }}</span>
+                    </th>
+                    <td>
+                        <span>{{ equipment.equipmentBrandDeviceTypeName }}</span>
+                    </td>
+                    <td>
+                        <span>{{ equipment.equipmentBrandName }}</span>
+                    </td>
+                </tr>
+                <tr class="text-center bg-secondary text-white">
+                    <th colspan="3" class="fw-normal text-center"><span>Name</span></th>
+                </tr>
+                <tr>
+                    <th colspan="3" class="fw-normal">
+                        <span>{{ equipment.name }}</span>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="">
+            <h6 class="text-center">Concrete List</h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let concrete of list | paginate : currentPage : ITEM_PER_PAGE" class="align-middle">
+                        <th scope="row">{{ concrete.id }}</th>
+                        <td>
+                            {{ concrete.price }}
+                        </td>
+                        <td>
+                            <div>
+                                <span
+                                    class="badge"
+                                    [class.text-bg-success]="concrete.statusOfConcreteEquipmentName === 'Available'"
+                                    [class.text-bg-secondary]="concrete.statusOfConcreteEquipmentName !== 'Available'"
+                                >
+                                    {{ concrete.statusOfConcreteEquipmentName }}</span
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <button
+                                    *ngIf="concrete.statusOfConcreteEquipmentName === 'Available'"
+                                    class="btn btn-primary"
+                                    (click)="showAsignmentModal(concrete)"
+                                >
+                                    Asign
+                                </button>
+                                <button *ngIf="concrete.statusOfConcreteEquipmentName === 'Borrowed'" class="btn btn-info" (click)="handleView(concrete.id)">View</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+        </div>
+    </div>
+
+    <app-asignment-modal *ngIf="showAsignment" (close)="showAsignment = false" (success)="assignSuccess()"></app-asignment-modal>
+    <app-asignment-view *ngIf="showConcreteView" [concreteInfo]="concreteInfo" (close)="showConcreteView = false"></app-asignment-view>
+
+    <app-error *ngIf="showWarning" (answer)="showWarning = false">
+        <span>Please choose a employee!</span>
+    </app-error>
+
+    <ng-template #showNotFound>
+        <div class="alert alert-warning">Not slected equippment!</div>
+    </ng-template>
+</div>

@@ -1,0 +1,14 @@
+<app-modal [status]="status">
+    <div class="modal-header justify-content-center">
+        <h5 class="modal-title">Warning</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="handleAnswer(false)"></button> -->
+    </div>
+    <div class="modal-body text-center">
+        <ng-content></ng-content>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+            (click)="handleAnswer(false)">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="handleAnswer(true)">Sure</button>
+    </div>
+</app-modal>

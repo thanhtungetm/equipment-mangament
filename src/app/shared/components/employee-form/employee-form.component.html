@@ -1,0 +1,140 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="px-1" [style.max-height.px]="550" [style.overflow-y]="'auto'" [style.overflow-x]="'hidden'">
+        <div class="row">
+            <div class="col mb-3" *ngIf="employee">
+                <label for="fullName" class="form-label">ID</label>
+                <input [disabled]="true" type="text" class="form-control" id="fullName" [value]="employee.id" />
+            </div>
+            <div class="col mb-3">
+                <label for="fullName" class="form-label">Full name</label>
+                <input
+                    formControlName="fullName"
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    placeholder="Full name of employee"
+                    [inputValid]="!f['fullName'].invalid || !f['fullName'].touched"
+                />
+                <div *ngIf="f['fullName'].errors" id="equipmentName1" class="invalid-feedback">
+                    <ng-container *ngIf="f['fullName'].errors['required']"> Full name is required! </ng-container>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!update" class="col mb-3">
+            <label for="username" class="form-label">User name</label>
+            <input
+                formControlName="username"
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Username"
+                [inputValid]="!f['username'].invalid || !f['username'].touched"
+            />
+            <div *ngIf="f['username'].errors" id="equipmentName1" class="invalid-feedback">
+                <ng-container *ngIf="f['username'].errors['required']"> Usrename is required! </ng-container>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!update">
+            <label for="password" class="form-label">Password</label>
+            <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="password"
+                [inputValid]="!f['password'].invalid || !f['password'].touched"
+            />
+            <div *ngIf="f['password'].errors" id="password" class="invalid-feedback">
+                <ng-container *ngIf="f['password'].errors['required']"> Password is required! </ng-container>
+                <ng-container *ngIf="f['password'].errors['isValid']">
+                    <div>
+                        <div>Password must:</div>
+                        <ul>
+                            <li>Min length is 8 characters</li>
+                            <li>At least one lowercase letter</li>
+                            <li>at least one uppercase letter</li>
+                            <li>at least one numeric digit</li>
+                            <li>at one special character</li>
+                        </ul>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                    formControlName="email"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="abc@email.com"
+                    [inputValid]="!f['email'].invalid || !f['email'].touched"
+                />
+                <div *ngIf="f['email'].errors" id="email" class="invalid-feedback">
+                    <ng-container *ngIf="f['email'].errors['required']"> Email is required! </ng-container>
+                    <ng-container *ngIf="f['email'].errors['email']"> Email incorrect! </ng-container>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number</label>
+                <input
+                    formControlName="phoneNumber"
+                    type="text"
+                    class="form-control"
+                    id="phoneNumber"
+                    placeholder="0868378845"
+                    [inputValid]="!f['phoneNumber'].invalid || !f['phoneNumber'].touched"
+                />
+                <div *ngIf="f['phoneNumber'].errors" id="equipmentName1" class="invalid-feedback">
+                    <ng-container *ngIf="f['phoneNumber'].errors['required']"> Phone number is required! </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input
+                    class="form-control"
+                    type="file"
+                    id="image"
+                    [inputValid]="!f['image'].invalid || !f['image'].touched"
+                    (change)="onFileSelected($event)"
+                />
+                <div *ngIf="f['image'].errors" id="equipmentName1" class="invalid-feedback">
+                    <ng-container *ngIf="f['image'].errors['required']">Please upload image</ng-container>
+                    <ng-container *ngIf="f['image'].errors['requiredFileType']">Only image file</ng-container>
+                </div>
+                <ng-container *ngIf="imageFile">
+                    <app-preview-image [file]="imageFile"></app-preview-image>
+                </ng-container>
+                <ng-container *ngIf="employee && !imageFile">
+                    <div class="preview-image">
+                        <img [src]="employee.imageUrl | imageUrl" />
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col" *ngIf="!update">
+                <label for="departmentId" class="form-label">Department</label>
+                <select
+                    id="departmentId"
+                    class="form-select"
+                    aria-label="Default select example"
+                    formControlName="departmentId"
+                    [inputValid]="!f['departmentId'].invalid || !f['departmentId'].touched"
+                >
+                    <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
+                </select>
+                <div *ngIf="f['departmentId'].errors" id="departmentId" class="invalid-feedback">
+                    <ng-container *ngIf="f['departmentId'].errors['required']">Please select a department </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckChecked">Create Concrete Equipment</label>
+            <input class="form-check-input form-check-input-lg" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+          </div> -->
+        <!-- [disabled]="form.invalid"  -->
+    </div>
+    <button [disabled]="form.invalid || form.pristine" type="submit" class="btn btn-primary">{{ update ? "Update" : "Add" }}</button>
+</form>

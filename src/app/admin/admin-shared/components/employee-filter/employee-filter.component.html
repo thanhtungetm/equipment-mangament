@@ -1,0 +1,29 @@
+<div class="employee-filter row align-items-center">
+    <div class="employee-filter__search position-relative d-flex align-items-center col-12 col-md-4">
+        <input
+            type="text"
+            class="form-control w-100"
+            placeholder="Search employee..."
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+            (input)="this.searchInput$.next($event.target)"
+            #searchInput
+        />
+        <div class="employee-filter__search__clear position-absolute" (click)="clear(searchInput)">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex align-items-center justify-content-start my-2 flex-wrap gap-2">
+        <div class="">
+            <span class="fs-6">Filter:</span>
+        </div>
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" (change)="handleChangeDepartment($event)">
+                <option selected value="">All</option>
+                <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
+            </select>
+            <label [style.padding-left.px]="20" for="floatingSelect">Department:</label>
+        </div>
+    </div>
+</div>

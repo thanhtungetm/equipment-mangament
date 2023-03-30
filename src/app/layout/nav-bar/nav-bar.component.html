@@ -1,0 +1,47 @@
+<div class="nav-bar">
+    <div class="nav-bar__logo">
+        <img src="assets/images/logo.png" alt="" srcset="" />
+    </div>
+    <div class="nav-bar__close" showCloseBtn (click)="close.emit()">
+        <fa-icon class="fs-3" [icon]="faTimes"></fa-icon>
+    </div>
+    <hr class="my-1" />
+    <ul class="nav-bar__links">
+        <ng-container *ngIf="!isUser">
+            <!-- <li class="nav-bar__links__item" [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+                <fa-icon class=""  [icon]="faHome"></fa-icon>
+                <span>Dashboard</span>
+            </li> -->
+            <!-- <hr /> -->
+            <li class="nav-bar__links__item" [routerLink]="['/admin/equipments']" [routerLinkActive]="['active']">
+                <fa-icon [icon]="faSliders"></fa-icon>
+                <span>Equiments</span>
+            </li>
+            <li class="nav-bar__links__item" [routerLink]="['/admin/equipment-asignment']" [routerLinkActive]="['active']">
+                <fa-icon [icon]="faFileSignature"></fa-icon>
+                <span>Asignment</span>
+            </li>
+            <li class="nav-bar__links__item" [routerLink]="['/admin/employee']" [routerLinkActive]="['active']">
+                <fa-icon [icon]="faUserGroup"></fa-icon>
+                <span>Employee</span>
+            </li>
+        </ng-container>
+
+        <!-- <ng-template #userNav> -->
+        <li class="nav-bar__links__item" [routerLink]="['/user']" [routerLinkActive]="['active']">
+            <fa-icon [icon]="faFileSignature"></fa-icon>
+            <span>User Asignment</span>
+        </li>
+        <!-- </ng-template> -->
+        <hr />
+        <li class="nav-bar__links__item" [routerLink]="['/profile']" [routerLinkActive]="['active']">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <span>Profile</span>
+        </li>
+
+        <li class="nav-bar__links__item" (click)="logout()">
+            <fa-icon [icon]="faSignOut"></fa-icon>
+            <span>Logout</span>
+        </li>
+    </ul>
+</div>

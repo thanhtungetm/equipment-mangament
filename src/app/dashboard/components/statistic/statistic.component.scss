@@ -1,0 +1,47 @@
+@import '../../../../varibale.scss';
+
+.statistic{
+    background: $white-bg;
+
+    
+
+    &__item{
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        gap: 5px;
+
+        &__icon{
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 100%;
+
+            color: $white-bg;
+            background-color: $secondary-bg;
+
+            &.employee_number{
+                background-color: #e0f9fc;
+                color: #37d9ed;
+            }
+            &.avalable_number{
+                background-color: #e5f8ed;
+                color: #28c76f;
+            }
+            &.assigned_number{
+                background-color: #fceaea;
+                color: #ea5455;
+            }
+        }
+
+        &__info{
+            height: 100%;
+            &__number{
+                font-size: 30px;
+            }
+        }
+    }
+}

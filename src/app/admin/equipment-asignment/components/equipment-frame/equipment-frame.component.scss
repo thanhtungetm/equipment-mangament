@@ -1,0 +1,13 @@
+@import '../../../../../varibale';
+.equipment-frame{
+    width: 100%;
+
+    // height: 450px;
+
+    border:1px solid $gray-text-color
+}
+
+.active{
+    background: $secondary-bg !important;
+    color: $white-text-color !important;
+}

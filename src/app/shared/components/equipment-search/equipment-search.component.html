@@ -1,0 +1,8 @@
+<div class="equipment-search position-relative d-flex align-items-center">
+    <input type="text" class="form-control w-100 " placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2" (input)="this.searchInput$.next($event.target)" 
+    #searchInput
+    />
+    <div class=" equipment-search__clear position-absolute" (click)="clear(searchInput)">
+        <fa-icon [icon]="faTimes"></fa-icon>
+    </div>
+</div>

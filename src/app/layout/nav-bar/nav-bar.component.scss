@@ -1,0 +1,71 @@
+@import '../../../varibale';
+.nav-bar{
+    position: relative;
+
+    &__close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 5px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 30px;
+        height: 30px;
+
+        background: $gray-text-color;
+        color: $white-bg;
+
+        border-radius: 100%;
+        cursor: pointer;
+
+        &:hover{
+            
+        }
+    }
+
+    &__logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 10px;
+        & > img{
+            width: 50%;
+        }
+        & > span{
+            font-weight: 500;
+            font-size: 20px;
+        }
+    }
+
+    &__links{
+        padding: 0px 10px;
+        &__item{
+            border-radius: 10px;
+            padding: 5px 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap:0 8px ;
+            font-weight: 400;
+            font-size: $lg-font-size;
+
+            cursor: pointer;
+
+            &:hover{
+                background:$light-bg;
+            }
+        }
+
+        &__item.active{
+            background: $secondary-bg;
+            color: $white-text-color;
+
+            &:hover{
+                background: $light-secondary-bg;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+@import '../../../../varibale';
+
+.equipment-search{
+
+    height: 100%;
+
+    input:not(:placeholder-shown)~ &__clear{
+        display: block;
+    }
+    
+    &__clear{
+        display: none;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 13px;
+
+        margin-right: 10px;
+        padding: 0 6px;
+        border-radius: 50%;
+
+        background-color: $gray-text-color;
+        color: $white-bg;
+        cursor: pointer;
+
+        &:hover{
+            background-color: $gray-text-color;
+        }
+    }
+}

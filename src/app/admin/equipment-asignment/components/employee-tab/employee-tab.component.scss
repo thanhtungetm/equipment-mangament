@@ -1,0 +1,9 @@
+@import '../../../../../varibale';
+
+.employee__item{
+    &:hover{
+        background-color: $light-secondary-bg;
+        color: $white-text-color;
+        transition: all 0.3s ease;
+    }
+}

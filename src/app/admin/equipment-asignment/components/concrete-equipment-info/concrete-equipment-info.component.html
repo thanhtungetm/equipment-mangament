@@ -1,0 +1,30 @@
+<div *ngIf="equipment&&concrete" class="text-start">
+    <h5 class="text-primary">Equipment:</h5>
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="text-center bg-secondary text-white">
+                <th colspan="2" class="fw-normal text-center"><span>Name</span></th>
+                <th class="fw-normal text-center"><span>Concrete ID</span></th>
+            </tr>
+            <tr>
+                <th colspan="2" class="fw-normal">
+                    <span> {{equipment.name}}</span>
+                </th>
+                <th class="fw-normal" scope="row">
+                    <span> {{concrete.id}}</span>
+                </th>
+            </tr>
+            <tr class="text-center bg-secondary text-white">
+                <th scope="row" class="fw-normal">Price</th>
+                <td>Type</td>
+                <td>Brand</td>
+            </tr>
+            <tr class="text-center ">
+                <th class="fw-normal">{{concrete.price}}</th>
+                <td>{{equipment.equipmentBrandDeviceTypeName}}</td>
+                <td>{{equipment.equipmentBrandName}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>

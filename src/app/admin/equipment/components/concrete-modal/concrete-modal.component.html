@@ -1,0 +1,81 @@
+<app-modal [status]="status">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Concrete Equipment</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="toggle()"></button>
+    </div>
+    <div class="modal-body" *ngIf="equipment">
+        <div class="">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Concrete List</h5>
+                <button *ngIf="!showAddConcrete" class="btn btn-primary" (click)="showAddConcrete = true">Add</button>
+            </div>
+
+            <div class="" *ngIf="showAddConcrete">
+                <form>
+                    <div class="mb-3">
+                        <label for="equipmentName" class="form-label">Name</label>
+                        <input
+                            type="number"
+                            [(ngModel)]="addConcreteModel.price"
+                            min="0"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            #price="ngModel"
+                            placeholder="250.000"
+                        />
+                        <div [hidden]="price.valid || price.pristine" class="text-danger">Price is a positive number</div>
+                    </div>
+                    <button class="btn btn-secondary" (click)="showAddConcrete = false; showSuccess = false">Close</button>
+                    <button class="btn btn-primary mx-2" (click)="addConcrete()">Add</button>
+                    <div *ngIf="showSuccess" class="text-success">Add a concrete equipment successfully!</div>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let concrete of list | paginate : currentPage : ITEM_PER_PAGE" class="align-middle">
+                        <th scope="row">{{ concrete.id }}</th>
+                        <td>
+                            {{ concrete.price }}
+                        </td>
+                        <td>
+                            <div>
+                                <span
+                                    class="badge"
+                                    [class.text-bg-success]="concrete.statusOfConcreteEquipmentName === 'Available'"
+                                    [class.text-bg-secondary]="concrete.statusOfConcreteEquipmentName !== 'Available'"
+                                >
+                                    {{ concrete.statusOfConcreteEquipmentName }}</span
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <button class="btn btn-danger" (click)="openDeleteWarning(concrete)">
+                                    <fa-icon [icon]="faTimes"></fa-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="toggle()">Close</button>
+    </div>
+
+    <app-warning *ngIf="showWarning" (answer)="deleteConcrete($event)">
+        <span>Are you sure to delele Concrete with ID:<b class="text-warning">{{currentConcrete?.id}}</b></span>
+    </app-warning>
+
+</app-modal>

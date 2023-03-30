@@ -1,0 +1,28 @@
+<div class="employee__filter py-2 row">
+    <app-employee-filter></app-employee-filter>
+</div>
+
+<div class="overflow-auto">
+    <table class="table employee__table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Department</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="list.length !== 0">
+            <tr *ngFor="let employee of list | paginate : currentPage : ITEM_PER_PAGE" class="employee__item align-middle cursor-pointer" (click)="handleSelect(employee)">
+                <th [style.width.%]="10" scope="row">{{ employee.id }}</th>
+
+                <td class="text-truncate" [style.max-width.px]="80">{{ employee.fullName }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.departmentName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+</div>

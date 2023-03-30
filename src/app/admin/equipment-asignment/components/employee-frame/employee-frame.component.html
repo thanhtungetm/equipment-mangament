@@ -1,0 +1,16 @@
+<div class="equipment-frame p-2">
+    <h5 class="text-center text-warning">Select the employee to assign equipment</h5>
+    <ul class="nav nav-tabs mb-2">
+        <li class="nav-item cursor-pointer" (click)="currentTab = EmployeeFrame.EMPLOYEE_TAB">
+            <a class="nav-link" [class.active]="currentTab === EmployeeFrame.EMPLOYEE_TAB" aria-current="page">Employee</a>
+        </li>
+        <li class="nav-item cursor-pointer" (click)="currentTab = EmployeeFrame.EMPLOYEE_DETAIL_TAB">
+            <a class="nav-link" [class.active]="currentTab === EmployeeFrame.EMPLOYEE_DETAIL_TAB">Current Employee</a>
+        </li>
+    </ul>
+    <div>
+        <app-employee-tab [list]="list" (select)="selectEmployee($event)" *ngIf="currentTab === EmployeeFrame.EMPLOYEE_TAB"></app-employee-tab>
+        <app-employee-detail [employee]="currentEmployee" *ngIf="currentTab === EmployeeFrame.EMPLOYEE_DETAIL_TAB"></app-employee-detail>
+        <!-- <app-concrete-equipment-tab [equipment]="currentEquipment" *ngIf="currentTab===EmployeeFrame.CONCRETE_EQUIPMENT_TAB"></app-concrete-equipment-tab> -->
+    </div>
+</div>

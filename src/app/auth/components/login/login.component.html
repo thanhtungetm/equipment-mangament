@@ -1,0 +1,60 @@
+<div class="login row">
+    <div class="login__left-image d-none d-md-block col-md-6">
+        <img
+            src="https://previews.123rf.com/images/luplupme/luplupme2002/luplupme200200062/139530231-computer-and-digital-equipments-devices-at-desktop-workplace-vector-illustration-pc-computer.jpg"
+            alt=""
+        />
+    </div>
+    <div class="login__container col-12 col-md-6">
+        <form class="login__container__form" [formGroup]="loginForm" (ngSubmit)="submit()">
+            <div class="text-center">
+                <img [style.width]="'180px'" src="https://www.tma.vn/Themes/TMAVN.Theme/Images/TMA-logo2.png" alt="" srcset="" />
+            </div>
+            <h1 class="text-center text-primary">Login</h1>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Username</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    [inputValid]="!f['username'].invalid || !f['username'].touched"
+                    id="exampleFormControlInput1"
+                    placeholder="name@example.com"
+                    autocomplete="off"
+                    formControlName="username"
+                />
+                <div *ngIf="f['username'].errors" id="exampleFormControlInput1" class="invalid-feedback">
+                    <ng-container *ngIf="f['username'].errors['required']"> Username is required! </ng-container>
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlInput2" class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    [inputValid]="!f['password'].invalid || !f['password'].touched"
+                    id="exampleFormControlInput2"
+                    placeholder="Password"
+                    autocomplete="off"
+                    formControlName="password"
+                />
+                <div *ngIf="f['password'].errors" id="exampleFormControlInput1" class="invalid-feedback">
+                    <ng-container *ngIf="f['password'].errors['required']"> Password is required! </ng-container>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div *ngIf="errMessage" class="alert alert-danger" role="alert">
+                    {{ errMessage }}
+                </div>
+                <div *ngIf="f['username'].errors?.['hasWhiteSpace'] ||f['password'].errors?.['hasWhiteSpace'] " class="alert alert-danger" role="alert">
+                    Username cant not contain the white sapce!
+                </div>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+                <button *ngIf="!isLoading" type="submit" class="login_btn btn btn-primary btn-lg" [disabled]="loginForm.invalid">Login</button>
+                <div *ngIf="isLoading" class="text-center">
+                    <div class="spinner-border text-primary" role="status"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

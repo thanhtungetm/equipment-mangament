@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-12 col-md-2 d-flex align-items-center justify-content-center justify-content-md-end fs-5 gap-2 my-2">
+        <!-- <fa-icon [icon]="faFilter"></fa-icon> -->
+        <span class="fs-6">Filter:</span>
+    </div>
+    <div class="form-floating col-6 col-md-5">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" (change)="handleChangeDeviceType($event)">
+            <option selected value="">All</option>
+            <option *ngFor="let deviceType of deviceTypeList" [value]="deviceType.id">{{ deviceType.name }}</option>
+        </select>
+        <label [style.padding-left.px]="20" for="floatingSelect">Device Type:</label>
+    </div>
+    <div class="form-floating col-6 col-md-5">
+        <select
+            class="form-select"
+            id="floatingSelect"
+            aria-label="Floating label select example"
+            [attr.disabled]="brandList.length === 0 ? true : null"
+            (change)="handleChangeDeviceBrand($event)"
+        >
+            <option selected value="">All</option>
+            <option *ngFor="let deviceBrand of brandList" [value]="deviceBrand.id">{{ deviceBrand.name }}</option>
+        </select>
+        <label [style.padding-left.px]="20" for="floatingSelect">Brand</label>
+    </div>
+</div>

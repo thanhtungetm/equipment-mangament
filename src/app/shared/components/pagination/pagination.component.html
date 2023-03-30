@@ -1,0 +1,27 @@
+<div class="pagination d-flex flex-column justify-content-center align-items-center">
+    <ul class="pagination">
+        <li class="page-item cursor-pointer" [class.disabled]="currentPage === 0" (click)="currentPage !== 0 && changePage(currentPage - 1)">
+            <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li *ngIf="currentPage !== 0" (click)="changePage(currentPage - 1)" class="page-item cursor-pointer">
+            <a class="page-link">{{ currentPage }}</a>
+        </li>
+        <li class="page-item cursor-pointer active" aria-current="page">
+            <a class="page-link">{{ currentPage + 1 }}</a>
+        </li>
+        <li *ngIf="currentPage + 2 <= total" class="page-item cursor-pointer">
+            <a class="page-link" (click)="changePage(currentPage + 1)">{{ currentPage + 2 }}</a>
+        </li>
+        <li class="page-item cursor-pointer" [class.disabled]="currentPage >= total - 1" (click)="currentPage < total - 1 && changePage(currentPage + 1)">
+            <a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
+        </li>
+    </ul>
+    <div *ngIf="!noneGoto" class="d-flex align-items-center mx-2 justify-content-center gap-2 flex-wrap">
+        <span class="text-primary"> Goto: </span>
+        <input #gotoInput [value]="currentPage + 1" type="number" min="1" [max]="total" [style.width.px]="60" class="h-100 px-1" />
+        <button class="btn btn-sm btn-outline-primary" (click)="total && goToPage(gotoInput)" [disabled]="total === 0">Go</button>
+        <div *ngIf="err" class="text-danger" role="alert">
+            Min page is: <b>{{ 1 }}</b> - Max Page is : <b>{{ total }}</b>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<app-modal [status]="'open'">
+    <div class="modal-header justify-content-center">
+        <h5 class="modal-title text-success text-center">Asignment View</h5>
+    </div>
+    <div *ngIf="employee" class="modal-body text-center">
+        <div class="text-start">
+            <h5 class="text-primary">Employee:</h5>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="text-center bg-secondary text-white">
+                        <th colspan="2" class="fw-normal text-center"><span>Name</span></th>
+                        <th class="fw-normal text-center"><span>Phone</span></th>
+                    </tr>
+                    <tr class="text-center">
+                        <th colspan="2" scope="row">
+                            <span>{{ employee.fullName }}</span>
+                        </th>
+                        <th scope="row">
+                            <span>{{ employee.phoneNumber }}</span>
+                        </th>
+                    </tr>
+                    <tr class="text-center bg-secondary text-white">
+                        <th scope="row" class="fw-normal" colspan="2">Email</th>
+                        <td>Department</td>
+                    </tr>
+                    <tr class="text-center">
+                        <th class="fw-normal" colspan="2">
+                            <span>{{ employee.email }}</span>
+                        </th>
+                        <td>
+                            <span>{{ employee.departmentName }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <div *ngIf="concreteInfo" class="text-start">
+            <h5 class="text-primary">Equipment:</h5>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="text-center bg-secondary text-white">
+                        <th  class="fw-normal text-center"><span>Name</span></th>
+                        <th class="fw-normal text-center"><span>Concrete ID</span></th>
+                    </tr>
+                    <tr>
+                        <th  class="fw-normal">
+                            <span> {{concreteInfo.equipmentName}}</span>
+                        </th>
+                        <th class="fw-normal text-center" scope="row">
+                            <span> {{concreteInfo.concreteEquipmentId}}</span>
+                        </th>
+                    </tr>
+                    <tr class="text-center bg-secondary text-white">
+                        
+                        <td>Type</td>
+                        <td>Brand</td>
+                    </tr>
+                    <tr class="text-center ">
+                        <td>{{concreteInfo.deviceTypeName}}</td>
+                        <td>{{concreteInfo.equipmentBrandName}}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <div >Expired Date :  {{ concreteInfo?.expiredAt | date : "dd/M/yyyy" }}</div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+    </div>
+</app-modal>

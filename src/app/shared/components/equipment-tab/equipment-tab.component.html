@@ -1,0 +1,34 @@
+<div class="equipment_tab">
+    <div class="">
+        <div class="mb-3">
+            <app-equipment-search></app-equipment-search>
+        </div>
+        <app-equipment-filter></app-equipment-filter>
+
+        <div class="overflow-auto">
+            <table class="table equipment_tab__table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        class="cursor-pointer table equipment_tab__table__item"
+                        *ngFor="let equipment of list | paginate : currentPage : ITEM_PER_PAGE"
+                        (click)="handleOpenEquipment(equipment)"
+                    >
+                        <th scope="row">{{ equipment.id }}</th>
+                        <td class="text-truncate" [style.max-width.px]="80" [title]="equipment.name">{{ equipment.name }}</td>
+                        <td>{{ equipment.equipmentBrandDeviceTypeName }}</td>
+                        <td>{{ equipment.equipmentBrandName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+</div>

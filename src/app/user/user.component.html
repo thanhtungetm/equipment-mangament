@@ -1,0 +1,95 @@
+<div class="user-asignment mt-2 p-3">
+    <div class="my-2">
+        <h4 class="">Asignment</h4>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 overflow-auto">
+            <!-- <h6 class="text-center">Assigned Equipment List</h6> -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Delivery Date</th>
+                        <th scope="col">Expired Date</th>
+                        <th scope="col">Returned Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <ng-template #skeleton>
+                    <tbody skeletonTable [skeletonCol]="7" [skeletonRow]="ITEM_PER_PAGE"></tbody>
+                </ng-template>
+                <tbody *ngIf="list.length!==0; else skeleton" class="table-group-divider">
+                    <tr *ngFor="let concrete of list | paginate : currentPage : ITEM_PER_PAGE" class="align-middle">
+                        <th scope="row">{{ concrete.id }}</th>
+                        <td scope="row" class="text-truncate" [style.max-width.px]="250">{{ concrete.equipmentName }}</td>
+                        <td class="text-info fw-bold">
+                            {{ concrete.createdAt | date : "dd/M/yyyy" }}
+                        </td>
+                        <td class="text-success fw-bold">
+                            {{ concrete.expiredAt | date : "dd/M/yyyy" }}
+                        </td>
+                        <td class="text-danger fw-bold">
+                            {{ concrete.returnDate | date : "dd/M/yyyy" }}
+                        </td>
+                        <td>
+                            <span class="badge text-bg-secondary" *ngIf="concrete.returnDate"> Rerturned </span>
+                            <span class="badge text-bg-success" *ngIf="!concrete.returnDate"> Using </span>
+                        </td>
+                        <td>
+                            <div>
+                                <button class="btn btn-info" (click)="openDetail(concrete)">Detail</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+        </div>
+        <!-- <div class="col-12 col-md-5">
+            <h6 class="text-center">Request List</h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col" >Delivery Date</th>
+                        <th scope="col">Expired Date</th>
+                        <th scope="col">Returned Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let concrete of list | paginate : currentPage : ITEM_PER_PAGE" class="align-middle">
+                        <th scope="row">{{ concrete.id }}</th>
+                        <td scope="row" class="text-truncate" [style.max-width.px]="250">{{ concrete.equipmentName }}</td>
+                        <td class="text-success fw-bold">
+                            {{ concrete.expiredAt | date : "dd/M/yyyy" }}
+                        </td>
+                        <td class="text-info fw-bold">
+                            {{ concrete.createdAt | date : "dd/M/yyyy" }}
+                        </td>
+                        <td class="text-danger fw-bold">
+                            {{ concrete.returnDate | date : "dd/M/yyyy" }}
+                        </td>
+                        <td>
+                            <span class="badge text-bg-secondary" *ngIf="concrete.returnDate"> Rerturned </span>
+                            <span class="badge text-bg-success" *ngIf="!concrete.returnDate"> Using </span>
+                        </td>
+                        <td>
+                            <div>
+                                <button class="btn btn-info" (click)="openDetail(concrete)">Detail</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+        </div> -->
+    </div>
+
+    <app-employee-concrete-modal *ngIf="showDetail" (close)="closeDetail()" [assignEquipment]="currentConcrete"></app-employee-concrete-modal>
+</div>

@@ -1,0 +1,66 @@
+<div class="equipment mt-2 p-3">
+    <div class="my-2 d-flex justify-content-between flex-wrap">
+        <h4>Equipment Management</h4>
+        <div>
+            <button class="btn btn-primary" (click)="openAddEquipment()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span class="d-inline-block mx-2">Add Equipment</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="equiment__filter py-2 row">
+        <div class="mb-2 col-12 col-md-4">
+            <app-equipment-search></app-equipment-search>
+        </div>
+        <div class="col-12 col-md-8">
+            <app-equipment-filter></app-equipment-filter>
+        </div>
+    </div>
+
+    <div class="overflow-auto">
+        <table class="table equipment__table">
+            <thead class="" app-table-head [columnList]="columnList" (currentSortFieldChange)="sortBy($event)"></thead>
+
+            <ng-template #skeleton>
+                <tbody skeletonTable [skeletonCol]="columnList.length" [skeletonRow]="ITEM_PER_PAGE"></tbody>
+            </ng-template>
+
+            <tbody *ngIf="list.length !== 0; else skeleton">
+                <tr *ngFor="let equipment of list | paginate : currentPage : ITEM_PER_PAGE" class="equipment__item align-middle">
+                    <th [style.width.%]="10" scope="row">{{ equipment.id }}</th>
+                    <td class="col-1">
+                        <img class="equipment__item__image" [style.object-fit]="'contain'" [src]="equipment.imageUrl | imageUrl" />
+                    </td>
+                    <th class="text-truncate" [style.max-width.px]="80" [title]="equipment.name">{{ equipment.name }}</th>
+                    <td>{{ equipment.equipmentBrandDeviceTypeName }}</td>
+                    <td>{{ equipment.equipmentBrandName }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-warning" (click)="openUpdateEquipment(equipment)">Update</button>
+                            <button class="btn btn-primary" (click)="openConcreteEquipment(equipment)">Concrete</button>
+                            <button class="btn btn-danger" (click)="openDeleteEquipment(equipment)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <app-pagination
+            *ngIf="list.length !== 0"
+            [length]="list.length"
+            [currentPage]="currentPage"
+            [itemPerPage]="ITEM_PER_PAGE"
+            (currentPageChange)="handleChangePage($event)"
+        ></app-pagination>
+        <ng-container #modalContainer></ng-container>
+        <!-- <app-add-equipment></app-add-equipment> -->
+        <ng-container *ngIf="showWarning">
+            <app-warning (answer)="deleteEquipment($event)">
+                <span>
+                    Are you sure to delete <b class="text-warning">{{ currentEquipment?.name }}</b>
+                </span>
+            </app-warning>
+        </ng-container>
+    </div>
+</div>

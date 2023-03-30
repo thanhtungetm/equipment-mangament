@@ -1,0 +1,10 @@
+
+<div class="profile mt-2 p-3">
+    <div class="my-2">
+        <h4 class="">Profile</h4>
+    </div>
+
+    <div *ngIf="user">
+        <app-employee-form  [update]="true" [employee]="user" (onSubmit)="submit($event)" ></app-employee-form>
+    </div>
+</div>

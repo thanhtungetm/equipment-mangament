@@ -1,0 +1,88 @@
+<div>
+    <div *ngIf="employee; else showNotFound">
+        <div>Employee Infomation:</div>
+        <table class="table table-bordered">
+            <tbody>
+                <tr class="text-center bg-secondary text-white">
+                    <th scope="row">Id</th>
+                    <td>Name</td>
+                </tr>
+                <tr class="text-center">
+                    <th>
+                        <span>{{ employee.id }}</span>
+                    </th>
+                    <td>
+                        <span>{{ employee.fullName }}</span>
+                    </td>
+                </tr>
+                <tr class="text-center bg-secondary text-white">
+                    <td scope="row">Email</td>
+                    <td>Department</td>
+                </tr>
+                <tr class="text-center">
+                    <td>
+                        <span>{{ employee.email }}</span>
+                    </td>
+                    <td>
+                        <span>{{ employee.departmentName }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="">
+            <h6 class="text-center">Assigned Equipment List</h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Expired Date</th>
+                        <th scope="col">Returned Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let concrete of list | paginate : currentPage : ITEM_PER_PAGE" class="align-middle">
+                        <th scope="row">{{ concrete.id }}</th>
+                        <td scope="row" class="text-truncate" [style.max-width.px]="50">{{ concrete.equipmentName }}</td>
+                        <td>
+                            {{ concrete.expiredAt | date : "dd/M/yyyy" }}
+                        </td>
+                        <td>
+                            {{ concrete.returnDate | date : "dd/M/yyyy" }}
+                        </td>
+                        <td>
+                            <div>
+                                <button class="btn btn-info" (click)="openDetail(concrete)">Detail</button>
+                                <button [disabled]="concrete.returnDate" class="btn btn-danger mx-2" (click)="openRevokeWarning(concrete)">Revoke</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-pagination [length]="list.length" [(currentPage)]="currentPage" [itemPerPage]="ITEM_PER_PAGE" [noneGoto]="true"></app-pagination>
+        </div>
+    </div>
+
+    <app-employee-concrete-modal *ngIf="showDetail" (close)="closeDetail()" [assignEquipment]="currentConcrete"></app-employee-concrete-modal>
+    <!-- <app-asignment-modal *ngIf="showAsignment" (close)="showAsignment=false"></app-asignment-modal> -->
+
+    <ng-container *ngIf="showWarning">
+        <app-warning (answer)="revokeEquipment($event)">
+            <span>
+                <div class="text-start">
+                    Are you sure to revoke equipment: <div>
+                        <b class="text-warning">{{ currentConcrete?.equipmentName }} </b>
+                    </div>
+                </div>
+                <div class="text-start">
+                    from Employee: <b class="text-warning">{{ employee?.fullName }} </b>
+                </div>
+            </span>
+        </app-warning>
+    </ng-container>
+
+    <ng-template #showNotFound>
+        <div class="alert alert-warning">Not slected employee!</div>
+    </ng-template>
+</div>

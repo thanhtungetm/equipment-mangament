@@ -1,0 +1,30 @@
+@import '../../../varibale';
+.equipment{
+    background-color: $white-bg;
+    
+    &__table{
+        &__head{
+            background-color: $bg-table-head;
+            & > th:not(th:last-child,th:first-child){
+                border-left: 2px solid white;
+                border-right: 2px solid white;
+            }
+            & > .available_sort{
+                cursor: pointer;
+            }
+            & > .active_sort{
+                background: $light-secondary-bg;
+                color: $white-text-color
+            }
+        } 
+    }
+
+    &__item{
+
+        &__image{
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+}   

@@ -1,0 +1,22 @@
+<!-- <thead class=""> -->
+    <!-- <ng-template #contentBody> -->
+        <tr class="equipment__table__head gap-1">
+            <ng-container *ngFor="let column of columnList">
+                <!-- <h1>hah</h1> -->
+                <th
+                    *ngIf="column.fieldName; else normalColumn"
+                    scope="col"
+                    class="available_sort"
+                    (click)="sortBy(column.fieldName)"
+                    [class.active_sort]="currentSortField === column.fieldName"
+                >
+                    <span class="d-inline-block mx-2">{{ column.title }}</span>
+                    <fa-icon [icon]="faSort"></fa-icon>
+                </th>
+                <ng-template #normalColumn>
+                    <th scope="col">{{ column.title }}</th>
+                </ng-template>
+            </ng-container>
+        </tr>
+    <!-- </ng-template> -->
+<!-- </thead> -->

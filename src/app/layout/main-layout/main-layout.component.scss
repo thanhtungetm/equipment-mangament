@@ -1,0 +1,80 @@
+@import "../../../varibale";
+.main-layout {
+    background: $light-bg;
+    min-height: 100vh;
+
+    &__navbar {
+        max-width: 250px;
+
+        position: fixed;
+        width: 100%;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        background-color: $white-bg;
+        color: $gray-text-color;
+        transform: translateX(-100%);
+
+        transition: all 0.3s ease-in-out;
+        &.open{
+            transform: translateX(0);
+            z-index: 100;
+            & ~ .overplay{
+                display: block;
+            }
+        }
+        @media (min-width: 576px) {
+            transform: translateX(0);
+        }
+    }
+    &__container {
+        margin-left: 0;
+
+        transition: all 0.3s ease-in-out;
+
+        &__header {
+            display: flex;
+            padding: 5px 10px;
+
+            background: $secondary-bg;
+
+            align-items: center;
+
+            &__toggle-navbar {
+                color: red;
+                & > button{
+                    background-color: $white-bg;
+                    color: $light-secondary-bg;
+                }
+            }
+            &__logo {
+                flex-grow: 1;
+
+                color: $white-bg;
+                font-weight: 400;
+                img {
+                    width: 100px;
+                }
+            }
+        }
+
+        @media (min-width: 576px) {
+            margin-left: 250px;
+        }
+    }
+}
+
+.overplay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: $light-bg;
+    opacity: 0.8;
+}
+

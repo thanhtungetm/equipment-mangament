@@ -1,0 +1,13 @@
+<app-modal [status]="status">
+    <div class="modal-header btn-primary">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add employee</h1>
+        <button (click)="toggle()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-employee-form #form (onSubmit)="submit($event)"></app-employee-form>
+    </div>
+
+    <app-warning *ngIf="showWarning" (answer)="handleAnwserFromWarning($event)"> Are you sure to close <b class="text-warning">Add Employee</b>! </app-warning>
+    <app-success *ngIf="showSuccess" (answer)="handleCloseSuccess()"> Create a  <b class="text-success"> Employee</b> successfully! </app-success>
+    <app-error *ngIf="showError" > Create a  <b class="text-danger"> Employee</b> not successfully! </app-error>
+</app-modal>

@@ -1,0 +1,45 @@
+<app-modal [status]="'open'">
+    <div class="modal-header justify-content-center">
+        <h5 class="modal-title text-success text-center">Asignment</h5>
+        
+    </div>
+    <div  class="modal-body text-center" *ngIf="assignEquipment">
+        <h5 class="text-primary">Equipment:</h5>
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="text-center bg-secondary text-white">
+                <th colspan="2" class="fw-normal text-center"><span>Name</span></th>
+                <th class="fw-normal text-center"><span>Concrete ID</span></th>
+            </tr>
+            <tr>
+                <th colspan="2" class="fw-normal">
+                    <span> {{assignEquipment.equipmentName}}</span>
+                </th>
+                <th class="fw-normal" scope="row">
+                    <span> {{assignEquipment.id}}</span>
+                </th>
+            </tr>
+            <tr class="text-center bg-secondary text-white">
+                <th scope="row" class="fw-normal">Price</th>
+                <td>Type</td>
+                <td>Brand</td>
+            </tr>
+            <tr class="text-center ">
+                <th class="fw-normal">{{assignEquipment.concreteEquipmentPrice}}</th>
+                <td>{{assignEquipment.deviceTypeName}}</td>
+                <td>{{assignEquipment.equipmentBrandName}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+        <div class="d-flex justify-content-between">
+            <div >Expired Date :  {{ assignEquipment.expiredAt | date : "dd/M/yyyy" }}</div>
+            <div *ngIf="assignEquipment.returnDate">Returned Date :  {{ assignEquipment.returnDate | date : "dd/M/yyyy" }}</div>
+           
+        </div>
+        
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="close.emit()" >Close</button>
+    </div>
+</app-modal>

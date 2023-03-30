@@ -1,0 +1,114 @@
+<app-modal [status]="status">
+    <div class="modal-header btn-primary">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Equipment</h1>
+        <button (click)="toggle()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <app-equipment-form [update]="true" [equipment]="equipment" (onSubmit)="submit($event)"></app-equipment-form>
+        <!-- <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="px-1" [style.max-height.px]="550" [style.overflow-y]="'auto'" [style.overflow-x]="'hidden'">
+                <div class="mb-3">
+                    <label for="equipmentName" class="form-label">Id</label>
+                    <input
+                       [value]="equipment?.id"
+                        type="text"
+                        class="form-control"
+                        id="equipmentName"
+                        disabled
+                    />
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="equipmentName" class="form-label">Name</label>
+                    <input
+                        formControlName="name"
+                        type="text"
+                        class="form-control"
+                        id="equipmentName"
+                        placeholder="Screen 24 Inch"
+                        [inputValid]="!f['name'].invalid || !f['name'].touched"
+                    />
+                    <div *ngIf="f['name'].errors" id="equipmentName1" class="invalid-feedback">
+                        <ng-container *ngIf="f['name'].errors['required']"> Name is required! </ng-container>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label for="equipmentType" class="form-label">Type</label>
+                        <select
+                            id="equipmentType"
+                            class="form-select"
+                            aria-label="Default select example"
+                            (change)="handleChangeDeviceType($event)"
+                            formControlName="equipmentType"
+                            [inputValid]="!f['equipmentType'].invalid || !f['equipmentType'].touched"
+                        >
+                            <option value="">Select a type</option>
+                            <option *ngFor="let deviceType of deviceTypeList" [value]="deviceType.id">{{ deviceType.name }}</option>
+                        </select>
+
+                        <div *ngIf="f['equipmentType'].errors" id="equipmentName1" class="invalid-feedback">
+                            <ng-container *ngIf="f['equipmentType'].errors['required']">Please select a type </ng-container>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="equipmentBrand" class="form-label">Brand</label>
+                        <select
+                            id="equipmentBrand"
+                            class="form-select"
+                            aria-label="Default select example"
+                            formControlName="equipmentBrandId"
+                            [inputValid]="!f['equipmentBrandId'].invalid || !f['equipmentBrandId'].touched"
+                        >
+                            <option value="">Select a brand</option>
+                            <option *ngFor="let deviceBrand of brandList" [value]="deviceBrand.id">{{ deviceBrand.name }}</option>
+                        </select>
+                        <div *ngIf="f['equipmentBrandId'].errors" id="equipmentName1" class="invalid-feedback">
+                            <ng-container *ngIf="f['equipmentBrandId'].errors['required']">Please select a Brand </ng-container>
+                            <ng-container *ngIf="f['equipmentBrandId'].errors['noneBrandId']">Not at all in this type</ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea formControlName="specifications" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="equipmentImage" class="form-label">Image</label>
+                    <input
+                        class="form-control"
+                        type="file"
+                        id="equipmentImage"
+                        [inputValid]="!f['image'].invalid || !f['image'].touched"
+                        (change)="onFileSelected($event)"
+                    />
+                    <div *ngIf="f['image'].errors" id="equipmentName1" class="invalid-feedback">
+                        <ng-container *ngIf="f['image'].errors['required']">Please upload image</ng-container>
+                        <ng-container *ngIf="f['image'].errors['requiredFileType']">Only image file</ng-container>
+                    </div>
+                    
+                    <ng-container *ngIf="imageFile">
+                        <app-preview-image [file]="imageFile"></app-preview-image>
+                    </ng-container>
+
+                    <ng-container *ngIf="equipment&&!imageFile">
+                        <div class="preview-image">
+                            <img [src]="equipment.imageUrl | imageUrl" />
+                        </div>
+                    </ng-container>
+                </div> -->
+
+        <!-- <div class="form-check form-switch">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Create Concrete Equipment</label>
+                    <input class="form-check-input form-check-input-lg" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                  </div> -->
+        <!-- </div>
+            <button [disabled]="form.pristine && !f['image'].value" type="submit" class="btn btn-primary">Add</button>
+        </form> -->
+    </div>
+
+    <app-warning *ngIf="showWarning" (answer)="handleAnwserFromWarning($event)"> Are you sure to close <b class="text-warning">Update Equipment</b>! </app-warning>
+    <app-success *ngIf="showSuccess" (answer)="handleCloseSuccess()"> Update a <b class="text-success"> Equipment</b> successfully! </app-success>
+    <app-error *ngIf="showError"> Error when update <b class="text-success"> Equipment</b> ! </app-error>
+</app-modal>
